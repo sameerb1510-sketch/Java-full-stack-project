@@ -1,0 +1,39 @@
+Cursor prompts (paste one at a time, move on only when the previous one works)
+
+Setup: put style.mdc in gym-project/.cursor/rules/style.mdc, open gym-project in Cursor, open Agent chat (Ctrl+L).
+
+Step 1
+
+Create the folder structure, schema.sql (all tables, 3 plans: Monthly 1, Quarterly 3, Yearly 12 months, and 5 sample members, some already expired), and the Spring Boot project in backend with web, data-jpa, mysql and validation dependencies. In application.properties use placeholder MySQL username and password and ddl-auto=update. Run it and confirm it connects to MySQL.
+
+Step 2
+
+Build Plan and Member backend. Plans: GET, POST, PUT /plans/{id}, DELETE /plans/{id}. Members: GET /members, GET /members/{id}, POST, PUT, DELETE. On member create, generate a unique random 4 digit member_code (retry if it exists) and set expiry_date = join_date + plan duration in months. Validation: name required, phone exactly 10 digits, email valid. Add MemberNotFoundException, InvalidPlanException, duplicate phone/email handling, all in one @RestControllerAdvice with clear messages and correct HTTP status. Enable CORS for http://localhost:5173. Test with curl.
+
+Step 3
+
+Add GET /members/search?name= (case-insensitive partial match), GET /members/expired (expiry before today or within the next 7 days), and GET /dashboard (total, active, expired counts). Test with curl.
+
+Step 4
+
+Create the React app with Vite in frontend, a nav bar (Dashboard, Members, Expired, Plans, Check in) and routes. Build /members: table (name, phone, plan, expiry date, member code), search box, Edit and Delete buttons, expired members in red text, and an Add button. Build /members/add and /members/edit/:id with one shared form (name, phone, email, join date, plan dropdown from /plans), client-side validation, error messages shown below the form and backend errors shown to the user. Use useState and useEffect.
+
+Step 5
+
+Build the / dashboard page (counts), /expired page, and /plans page with list, add, edit and delete.
+
+Step 6
+
+Attendance backend: POST /attendance with a 4 digit member_code. Reject if the member is not found, the membership is expired, or they already checked in today. Otherwise save today's date. GET /attendance/{memberId} returns the check-in dates. Frontend: /checkin page (one input, Check in button, show backend message) and /attendance/:memberId page (table of dates), with a link from each member row.
+
+Step 7
+
+Payments backend: POST /payments (member_id, amount) saves today's date and extends the member's expiry_date by the plan duration. GET /payments/{memberId}. Frontend: /payments/:memberId with a table and an add payment form, linked from each member row.
+
+Step 8
+
+Create README.md (exact steps: create the database, mvn spring-boot:run, npm install, npm run dev), docs/er-diagram.md (Mermaid ER diagram), docs/test-cases.md (at least 20 test cases as a table: feature, input, expected, actual), and docs/project-report-outline.md (problem statement, objectives, technologies, modules, database design, screenshots, test cases, conclusion, future enhancements: JWT, Docker, microservices, tests). Then do a final check that everything runs from the README steps and list anything that does not work.
+
+Optional last step (only after all works)
+
+Add simple admin login: one hardcoded username and password checked by POST /login, a React login page that stores loggedIn in localStorage and hides other pages until logged in. No JWT.
