@@ -1,4 +1,4 @@
-name: Publish frontend demo to GitHub Pages
+name: Publish frontend app to GitHub Pages
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
       - run: npm run build
         working-directory: frontend
         env:
-          VITE_DEMO_MODE: 'true'
+          VITE_API_URL: https://forge-fitness-api.onrender.com
       - uses: actions/upload-pages-artifact@v3
         with:
           path: frontend/dist

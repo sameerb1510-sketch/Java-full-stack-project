@@ -51,13 +51,13 @@ The MySQL service is configured to start with Windows. If it is stopped, start i
 
 The demo login is `Admin` / `forge123`. This is a simple front-end demo gate; it does not secure the REST API and should not be used for real member data.
 
-The GitHub Pages preview uses sample data in read-only demo mode. It shows the app screens without a connection to the local MySQL database; changes are not saved.
+The GitHub Pages site connects to the Render backend, so member, plan, attendance, and payment changes are stored in the hosted database. The GitHub Pages login no longer displays the demo credentials hint.
 
 ## Deploy the full app on Render
 
 The root `render.yaml` describes a live frontend, Spring Boot API, and Render PostgreSQL database. The API image uses Java 21 and Maven from `backend/Dockerfile`. The backend has PostgreSQL and MySQL drivers: Render uses PostgreSQL, while local development can continue using MySQL. The Render Blueprint connects the services automatically; no database credentials need to be pasted into the Blueprint.
 
-The Render frontend is built without `VITE_DEMO_MODE`, so it uses the API and saves changes to PostgreSQL. The GitHub Pages workflow deliberately keeps `VITE_DEMO_MODE=true` for the read-only sample-data demo. The Render Blueprint sets the API CORS origin to `https://forge-fitness-web.onrender.com`; if Render assigns a different URL to the static site, update `FRONTEND_ORIGINS` on the API service to match it. Render's free PostgreSQL database expires 30 days after creation, so use it for a temporary demo and keep a backup if you need the data.
+Both hosted frontends use the live API and save changes to PostgreSQL. The Render Blueprint permits requests from the Render and GitHub Pages origins. If Render assigns a different URL to the static site or API, update the matching URL in `FRONTEND_ORIGINS` or the GitHub Pages workflow. Render's free PostgreSQL database expires 30 days after creation, so use it for a temporary demo and keep a backup if you need the data.
 
 If you use your own MySQL credentials, set `MYSQL_URL`, `MYSQL_USER`, and `MYSQL_PASSWORD` in the environment or `.env.local`. `application.properties` supplies placeholder defaults for the connection.
 

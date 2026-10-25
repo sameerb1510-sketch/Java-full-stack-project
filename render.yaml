@@ -28,7 +28,7 @@ services:
           name: forge-fitness-db
           property: password
       - key: FRONTEND_ORIGINS
-        value: https://forge-fitness-web.onrender.com
+        value: https://forge-fitness-web.onrender.com,https://sameerb1510-sketch.github.io
 
   - type: web
     name: forge-fitness-web
