@@ -57,7 +57,7 @@ The GitHub Pages site connects to the Render backend, so member, plan, attendanc
 
 The root `render.yaml` describes a live frontend, Spring Boot API, and Render PostgreSQL database. The API image uses Java 21 and Maven from `backend/Dockerfile`. Render's Docker build activates the `render-postgres` Maven profile to include the PostgreSQL driver; local development continues using MySQL without that additional dependency. The Render Blueprint connects the services automatically; no database credentials need to be pasted into the Blueprint.
 
-Both hosted frontends use the live API and save changes to PostgreSQL. The Render Blueprint permits requests from the Render and GitHub Pages origins. If Render assigns a different URL to the static site or API, update the matching URL in `FRONTEND_ORIGINS` or the GitHub Pages workflow. Render's free PostgreSQL database expires 30 days after creation, so use it for a temporary demo and keep a backup if you need the data.
+Both hosted frontends use the live API and save changes to PostgreSQL. The Render Blueprint permits requests from the Render static-site URL and GitHub Pages origin. If Render assigns a different static-site URL, update it in `FRONTEND_ORIGINS`. Render's free PostgreSQL database expires 30 days after creation, so use it for a temporary demo and keep a backup if you need the data.
 
 If you use your own MySQL credentials, set `MYSQL_URL`, `MYSQL_USER`, and `MYSQL_PASSWORD` in the environment or `.env.local`. `application.properties` supplies placeholder defaults for the connection.
 
