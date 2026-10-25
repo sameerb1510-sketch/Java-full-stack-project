@@ -160,7 +160,7 @@ tbody tr:hover { background: #fbfcfa; }
 .loading-state { min-height: 180px; display: flex; align-items: center; justify-content: center; gap: 10px; color: #8c968a; font-size: 11px; }
 .spinner { width: 15px; height: 15px; border: 2px solid #e3e9de; border-top-color: #819a69; border-radius: 50%; animation: spin .7s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.form-layout { max-width: 980px; display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 17px; align-items: start; }
+.form-layout { max-width: 980px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 17px; align-items: start; }
 .form-panel { padding: 23px; }
 .form-section-heading { display: flex; gap: 11px; align-items: flex-start; margin-bottom: 18px; }
 .section-number { color: #8b9f7e; font: 500 11px Georgia, serif; padding-top: 2px; }
@@ -174,11 +174,6 @@ tbody tr:hover { background: #fbfcfa; }
 .field input:focus, .field select:focus { border-color: #8ca478; box-shadow: 0 0 0 3px #8ca47820; }
 .field input::placeholder { color: #b1b9b0; }
 .form-actions { display: flex; justify-content: flex-end; gap: 9px; border-top: 1px solid #edf0eb; padding-top: 16px; margin-top: 17px; }
-.form-aside { min-height: 250px; border-radius: 9px; padding: 20px; background: #e9efe5; overflow: hidden; position: relative; }
-.form-aside h3 { color: #425340; font: 500 19px/1.2 Georgia, serif; margin: 0 0 8px; max-width: 160px; }
-.form-aside p { color: #818e7d; font-size: 9px; line-height: 1.6; margin: 0; }
-.aside-art { height: 105px; display: flex; justify-content: flex-end; align-items: center; color: #b4c9a5; font: 110px/1 Georgia, serif; margin: -8px 0 15px; }
-.aside-art i { position: absolute; right: 39px; top: 42px; color: #6f895e; font: normal 29px Georgia, serif; }
 .inline-hint { color: #9b8457; font-size: 9px; margin-top: -4px; }
 .inline-hint a { color: #637d50; font-weight: 700; }
 .plan-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
@@ -289,7 +284,6 @@ tbody tr:hover { background: #fbfcfa; }
   .quick-action-list { flex-direction: column; }
   .quick-action { min-width: 0; }
   .form-layout, .checkin-layout, .payment-layout { grid-template-columns: 1fr; }
-  .form-aside { display: none; }
   .form-panel { padding: 17px; }
   .field-grid { grid-template-columns: 1fr; gap: 0; }
   .plan-grid { grid-template-columns: 1fr; }

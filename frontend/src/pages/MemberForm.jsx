@@ -65,7 +65,6 @@ export default function MemberForm() {
           {plans.length === 0 && <div className="inline-hint">Add a plan before creating a member record. <Link to="/plans">Manage plans</Link></div>}
           <div className="form-actions"><Link className="button button-secondary" to="/members">Cancel</Link><button className="button button-primary" type="submit" disabled={saving || plans.length === 0}>{saving ? 'Saving…' : editing ? 'Save changes' : 'Create member'}</button></div>
         </form>
-        <aside className="form-aside"><div className="aside-art"><span>F</span><i>+</i></div><div className="eyebrow">MEMBER CODE</div><h3>A code is created automatically</h3><p>Each member receives a unique 4-digit code for quick check-in at the front desk.</p></aside>
       </div>
     </>
   )
