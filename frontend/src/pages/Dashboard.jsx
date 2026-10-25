@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { api, formatDate, formatMoney, memberStatus } from '../api.js'
+import gymBanner from '../assets/gym-banner.jpg'
 import LoadingState from '../components/LoadingState.jsx'
 import Notice from '../components/Notice.jsx'
 import PageHeading from '../components/PageHeading.jsx'
@@ -31,6 +32,10 @@ export default function Dashboard() {
   return (
     <>
       <PageHeading action={<Link className="button button-primary" to="/members/add"><span>＋</span> Add member</Link>} />
+      <section className="gym-banner" aria-label="Forge Fitness Club">
+        <div className="gym-banner-copy"><span>FORGE FITNESS CLUB</span><strong>Every rep counts.</strong><small>A club built on consistency.</small></div>
+        <img src={gymBanner} alt="A member choosing a dumbbell from the gym rack" />
+      </section>
       <Notice>{error}</Notice>
       <section className="metric-grid">
         <MetricCard label="Total members" value={summary?.totalMembers ?? '—'} detail="Across all membership plans" icon="♙" tone="metric-purple" />

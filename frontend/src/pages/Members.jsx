@@ -46,7 +46,12 @@ export default function Members() {
                 <td><span className="plan-name">{member.planName}</span></td><td>{formatDate(member.expiryDate)}</td>
                 <td><span className="code-chip">{member.memberCode}</span></td>
                 <td><span className={`status-pill ${status.toLowerCase().replace(' ', '-')}`}>{status}</span></td>
-                <td><div className="row-actions"><Link title="Attendance" to={`/attendance/${member.id}`}>↳</Link><Link title="Payments" to={`/payments/${member.id}`}>₹</Link><Link title="Edit member" to={`/members/edit/${member.id}`}>Edit</Link><button title="Delete member" className="icon-button danger-icon" onClick={() => removeMember(member)} aria-label={`Delete ${member.name}`}>×</button></div></td>
+                <td><div className="row-actions">
+                  <Link className="row-action-link" title="View attendance" aria-label={`View attendance for ${member.name}`} to={`/attendance/${member.id}`}><span aria-hidden="true">↳</span> Attendance</Link>
+                  <Link className="row-action-link" title="View payments" aria-label={`View payments for ${member.name}`} to={`/payments/${member.id}`}><span aria-hidden="true">₹</span> Payments</Link>
+                  <Link className="row-action-link" title="Edit member" aria-label={`Edit ${member.name}`} to={`/members/edit/${member.id}`}>Edit</Link>
+                  <button title="Delete member" className="row-action-link row-action-delete" onClick={() => removeMember(member)} aria-label={`Delete ${member.name}`}><span aria-hidden="true">×</span> Delete</button>
+                </div></td>
               </tr>
             })}
           </tbody></table></div>
