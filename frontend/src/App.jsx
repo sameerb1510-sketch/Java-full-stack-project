@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Navigate, NavLink, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import Dashboard from './pages/Dashboard.jsx'
 import Members from './pages/Members.jsx'
@@ -20,6 +21,12 @@ const navigation = [
 function AppShell() {
   const location = useLocation()
   const navigate = useNavigate()
+  const [profileOpen, setProfileOpen] = useState(false)
+  function signOut() {
+    localStorage.removeItem('forgeLoggedIn')
+    navigate('/login', { replace: true })
+    setProfileOpen(false)
+  }
   const activePage = navigation.find((item) => item.to === location.pathname)?.label
     ?? (location.pathname.startsWith('/members/') ? 'Members' : 'Dashboard')
 
@@ -41,14 +48,14 @@ function AppShell() {
         </nav>
         <div className="sidebar-bottom">
           <div className="club-status"><span className="status-dot" /> Club open <span>06:00–22:00</span></div>
-          <div className="profile-card"><div className="profile-avatar">S</div><div><strong>Sameer</strong><span>Club admin</span></div><button className="profile-menu logout-button" title="Sign out" aria-label="Sign out" onClick={() => { localStorage.removeItem('forgeLoggedIn'); navigate('/login', { replace: true }) }}>↪</button></div>
+          <div className="profile-card"><div className="profile-avatar">S</div><div><strong>Sameer</strong><span>Club admin</span></div><button className="profile-menu logout-button" title="Sign out" aria-label="Sign out" onClick={signOut}>↪</button></div>
         </div>
       </aside>
       <main className="main-area">
         {import.meta.env.VITE_DEMO_MODE === 'true' && <div className="demo-banner">Public UI demo · sample data · changes aren’t saved</div>}
         <header className="topbar">
           <div className="breadcrumb"><span>Workspace</span><span className="crumb-separator">/</span><strong>{activePage}</strong></div>
-          <div className="topbar-right"><span className="today-label">{new Intl.DateTimeFormat('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }).format(new Date())}</span><div className="topbar-avatar">S</div></div>
+          <div className="topbar-right"><span className="today-label">{new Intl.DateTimeFormat('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }).format(new Date())}</span><div className="profile-menu-wrap"><button className="topbar-avatar" aria-label="Open profile" aria-expanded={profileOpen} onClick={() => setProfileOpen((open) => !open)}>S</button>{profileOpen && <div className="profile-dropdown"><strong>Sameer</strong><span>Club admin</span><button onClick={signOut}>Sign out</button></div>}</div></div>
         </header>
         <div className="page-container"><Outlet /></div>
       </main>
